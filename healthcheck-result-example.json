@@ -1,0 +1,144 @@
+{
+    "active": 1,
+    "healthy": true,
+    "idle": 11,
+    "job_queue_stats": {
+        "processed_jobs": 37661,
+        "queues": {
+            "attachments_cleanup": {
+                "failure": 0,
+                "processed_jobs": 408,
+                "success": 408
+            },
+            "background": {
+                "failure": 1,
+                "processed_jobs": 101,
+                "success": 100
+            },
+            "federator_incoming": {
+                "failure": 10171,
+                "processed_jobs": 16900,
+                "success": 6729
+            },
+            "federator_outgoing": {
+                "failure": 404,
+                "processed_jobs": 2101,
+                "success": 1697
+            },
+            "nodeinfo_fetcher": {
+                "failure": 3,
+                "processed_jobs": 7450,
+                "success": 7447
+            },
+            "poll_notifications": {
+                "failure": 0,
+                "processed_jobs": 12,
+                "success": 12
+            },
+            "remote_fetcher": {
+                "failure": 260,
+                "processed_jobs": 2682,
+                "success": 2422
+            },
+            "search_indexing": {
+                "failure": 2,
+                "processed_jobs": 7892,
+                "success": 7890
+            },
+            "transmogrifier": {
+                "failure": 3,
+                "processed_jobs": 3,
+                "success": 0
+            },
+            "web_push": {
+                "failure": 4,
+                "processed_jobs": 112,
+                "success": 108
+            }
+        },
+        "workers": {
+            "Pleroma.Workers.AttachmentsCleanupWorker": {
+                "cleanup_attachments": {
+                    "failure": 0,
+                    "processed_jobs": 408,
+                    "success": 408
+                }
+            },
+            "Pleroma.Workers.BackgroundWorker": {
+                "delete_user": {
+                    "failure": 1,
+                    "processed_jobs": 101,
+                    "success": 100
+                }
+            },
+            "Pleroma.Workers.NodeInfoFetcherWorker": {
+                "process": {
+                    "failure": 3,
+                    "processed_jobs": 7450,
+                    "success": 7447
+                }
+            },
+            "Pleroma.Workers.PollWorker": {
+                "poll_end": {
+                    "failure": 0,
+                    "processed_jobs": 12,
+                    "success": 12
+                }
+            },
+            "Pleroma.Workers.PublisherWorker": {
+                "publish": {
+                    "failure": 0,
+                    "processed_jobs": 64,
+                    "success": 64
+                },
+                "publish_one": {
+                    "failure": 404,
+                    "processed_jobs": 2037,
+                    "success": 1633
+                }
+            },
+            "Pleroma.Workers.ReceiverWorker": {
+                "incoming_ap_doc": {
+                    "failure": 10171,
+                    "processed_jobs": 16900,
+                    "success": 6729
+                }
+            },
+            "Pleroma.Workers.RemoteFetcherWorker": {
+                "fetch_remote": {
+                    "failure": 260,
+                    "processed_jobs": 2682,
+                    "success": 2422
+                }
+            },
+            "Pleroma.Workers.SearchIndexingWorker": {
+                "add_to_index": {
+                    "failure": 2,
+                    "processed_jobs": 7484,
+                    "success": 7482
+                },
+                "remove_from_index": {
+                    "failure": 0,
+                    "processed_jobs": 408,
+                    "success": 408
+                }
+            },
+            "Pleroma.Workers.TransmogrifierWorker": {
+                "user_upgrade": {
+                    "failure": 3,
+                    "processed_jobs": 3,
+                    "success": 0
+                }
+            },
+            "Pleroma.Workers.WebPusherWorker": {
+                "web_push": {
+                    "failure": 4,
+                    "processed_jobs": 112,
+                    "success": 108
+                }
+            }
+        }
+    },
+    "memory_used": 646.88,
+    "pool_size": null
+}
