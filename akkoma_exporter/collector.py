@@ -15,8 +15,15 @@ class AkkomaCollector(object):
             "Is the Akkoma server healthy?",
             value=1 if hc["healthy"] else 0,
         )
-        yield GaugeMetricFamily("akkoma_active", "Active", value=hc["active"])
-        yield GaugeMetricFamily("akkoma_idle", "Idle", value=hc["idle"])
+        yield GaugeMetricFamily(
+            "akkoma_active", "Active database connections", value=hc["active"]
+        )
+        yield GaugeMetricFamily(
+            "akkoma_idle", "Idle database connections", value=hc["idle"]
+        )
+        yield GaugeMetricFamily(
+            "akkoma_pool_size", "Total database pool", value=hc["idle"]
+        )
 
         yield GaugeMetricFamily(
             "akkoma_memory_used",
