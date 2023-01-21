@@ -1,5 +1,6 @@
 import requests
 from prometheus_client.core import CounterMetricFamily, GaugeMetricFamily
+from requests.exceptions import RequestException
 
 
 class AkkomaCollector(object):
@@ -8,7 +9,17 @@ class AkkomaCollector(object):
         self.url = url
 
     def collect(self):
-        hc = requests.get(self.url).json()
+        try:
+            hc = requests.get(self.url).json()
+        except RequestException:
+            yield GaugeMetricFamily(
+                "akkoma_exporter_healthy", "Is this exporter healthy?", value=0
+            )
+            return
+
+        yield GaugeMetricFamily(
+            "akkoma_exporter_healthy", "Is this exporter healthy?", value=1
+        )
 
         yield GaugeMetricFamily(
             "akkoma_healthy",
