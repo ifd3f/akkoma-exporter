@@ -7,6 +7,8 @@ in {
   options.services.akkoma-prometheus-exporter = let
     instOpts = types.submodule ({ name, config, ... }: {
       options = {
+        enable = mkEnableOption "exporter for ${name}";
+
         user = mkOption {
           type = types.str;
           description = "User to run under";
@@ -22,6 +24,7 @@ in {
         url = mkOption {
           description = "URL to the healthcheck endpoint.";
           type = types.str;
+          default = "https://${name}/api/v1/pleroma/healthcheck";
         };
 
         port = mkOption {
@@ -35,8 +38,6 @@ in {
           default = pkgs.akkoma-exporter;
         };
       };
-
-      config.url = "https://${name}/api/v1/pleroma/healthcheck";
     });
 
   in mkOption {
@@ -47,20 +48,21 @@ in {
     '';
   };
 
-  config.systemd.services = mkMerge (mapAttrsToList (name: instCfg: {
-    "akkoma-exporter-${name}" = {
-      environment = {
-        URL = instCfg.url;
-        PORT = builtins.toString instCfg.port;
-      };
+  config.systemd.services = mkMerge (mapAttrsToList (name: instCfg:
+    mkIf instCfg.enable {
+      "akkoma-exporter-${name}" = {
+        environment = {
+          URL = instCfg.url;
+          PORT = builtins.toString instCfg.port;
+        };
 
-      serviceConfig = {
-        User = instCfg.user;
-        Group = instCfg.group;
-        ExecStart = "${instCfg.package}/bin/akkoma-exporter";
+        serviceConfig = {
+          User = instCfg.user;
+          Group = instCfg.group;
+          ExecStart = "${instCfg.package}/bin/akkoma-exporter";
+        };
       };
-    };
-  }) cfg);
+    }) cfg);
 
   config.users = mkMerge (mapAttrsToList (name: instCfg: {
     users = optionalAttrs (instCfg.user == defaultUser) {
